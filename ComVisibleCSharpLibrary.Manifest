@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3">
+
+<assemblyIdentity name="ComVisibleCSharpLibrary" version="1.0.0.0" type="win32" publicKeyToken="5C72CFB34764BDD9"/>
+
+<description>Built with: Side-by-Side Manifest Maker (8.0.5431.0) (x64)</description>
+<description>Copyright: (c) Maze Solutions LLC. All rights reserved.</description>
+<description>Licensee: Parkview systems; BN22 0AD; United Kingdom</description>
+<description>License: 1 user license</description>
+
+<clrClass
+   name="ComVisibleCSharpLibrary.PTouch"
+   clsid="{16A08691-A17F-4BAE-9D3B-FA5B50F51960}"
+   progid="ComVisibleCSharpLibrary.PTouch"
+   threadingModel="Both"/>
+
+<file name="ComVisibleCSharpLibrary.tlb">
+ <typelib
+     tlbid="{5355BB0A-A4AE-4A0B-821E-BF64E486AAFF}"
+     version="1.0"
+     helpdir=""
+     flags="hasdiskimage"/>
+</file>
+
+</assembly>

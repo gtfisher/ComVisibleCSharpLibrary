@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3">
+
+<assemblyIdentity name="CallCsharp.exe" version="1.0.0.0" type="win32" processorArchitecture="x86"/>
+
+<description>Built with: Side-by-Side Manifest Maker (8.0.5431.0) (x64)</description>
+<description>Copyright: (c) Maze Solutions LLC. All rights reserved.</description>
+<description>Licensee: Parkview systems; BN22 0AD; United Kingdom</description>
+<description>License: 1 user license</description>
+
+<dependency>
+ <dependentAssembly>
+  <assemblyIdentity name="pvs.dev.csharp-demo" version="1.0.0.0" type="win32" processorArchitecture="x86"/>
+ </dependentAssembly>
+</dependency>
+
+<dependency>
+ <dependentAssembly>
+  <assemblyIdentity name="ComVisibleCSharpLibrary" version="1.0.0.0" type="win32" publicKeyToken="5C72CFB34764BDD9"/>
+ </dependentAssembly>
+</dependency>
+
+</assembly>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sxs32mm version="360" required="360">
+   <project name="pvs.demo.regfreedemo" version="1.0.0.0" type="win32" token="" language="" build="auto" processor="x86" target="D:\dev\dotnet\ComVisibleCSharpLibrary\" expanded="D:\dev\dotnet\ComVisibleCSharpLibrary" relx="..\">
+      <assembly xirm="0">
+         <file path="D:\dev\dotnet\ComVisibleCSharpLibrary\CallCsharp.exe" relx="..\CallCsharp.exe" rely=".\CallCsharp.exe"/>
+         <file path="D:\dev\dotnet\ComVisibleCSharpLibrary\ComVisibleCSharpLibrary\bin\Debug\ComVisibleCSharpLibrary.dll" relx="..\ComVisibleCSharpLibrary\bin\Debug\ComVisibleCSharpLibrary.dll" rely=".\ComVisibleCSharpLibrary\bin\Debug\ComVisibleCSharpLibrary.dll"/>
+      </assembly>
+      <build xirm="0">
+      </build>
+   </project>
+</sxs32mm>
