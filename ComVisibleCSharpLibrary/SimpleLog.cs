@@ -20,16 +20,21 @@ namespace ComVisibleCSharpLibrary
 
             
             var logPath = Path.Combine(path, "log.txt");
+
+            string time = DateTime.Now.ToShortTimeString();
+            string date = DateTime.Now.ToShortDateString();
+
             //MessageBox.Show(logPath);
             if (!File.Exists(logPath))
                 using (StreamWriter sw = File.CreateText(logPath))
                 {
-                    sw.WriteLine(msg);
+                    sw.WriteLine($"{date} {time} {msg}");
                 }
             else
                 using (StreamWriter sw = File.AppendText(logPath))
                 {
-                    sw.WriteLine(msg);
+                    sw.WriteLine($"{date} {time} {msg}");
+
                 }
 
         }

@@ -1,14 +1,30 @@
 VERSION 5.00
 Begin VB.Form UseCsharp 
    Caption         =   "Form1"
-   ClientHeight    =   3015
+   ClientHeight    =   3435
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   6090
+   ClientWidth     =   6120
    LinkTopic       =   "Form1"
-   ScaleHeight     =   3015
-   ScaleWidth      =   6090
+   ScaleHeight     =   3435
+   ScaleWidth      =   6120
    StartUpPosition =   3  'Windows Default
+   Begin VB.TextBox tbWorkDir 
+      Height          =   375
+      Left            =   1680
+      TabIndex        =   17
+      Text            =   "D:\temp\WebView2UserDataFolder"
+      Top             =   3000
+      Width           =   3255
+   End
+   Begin VB.CommandButton Command1 
+      Caption         =   "Command1"
+      Height          =   375
+      Left            =   5040
+      TabIndex        =   15
+      Top             =   1560
+      Width           =   615
+   End
    Begin VB.ComboBox Combo1 
       Height          =   315
       ItemData        =   "UseCsharp.frx":0000
@@ -86,6 +102,14 @@ Begin VB.Form UseCsharp
       Top             =   480
       Width           =   2535
    End
+   Begin VB.Label Work 
+      Caption         =   "Work Dir"
+      Height          =   255
+      Left            =   360
+      TabIndex        =   16
+      Top             =   3000
+      Width           =   975
+   End
    Begin VB.Label Label4 
       Caption         =   "Page"
       Height          =   375
@@ -153,11 +177,22 @@ End Sub
 Private Sub btnShowWin_Click()
     Dim status As Integer
     Dim page As String
+    
     page = Combo1.Text
     status = oPTouch.ShowForm(page)
     
 End Sub
 
+
+Private Function IsInIDE() As Boolean
+    Dim mode
+    mode = App.LogMode
+        If mode = 0 Then
+            IsInIDE = True
+        ElseIf mode = 1 Then
+             IsInIDE = False
+        End If
+End Function
 
 Private Sub Form_Load()
     lblVersion.Caption = oPTouch.GetVersion
@@ -166,6 +201,11 @@ Private Sub Form_Load()
     Me.Combo1.AddItem ("hello.html")
     Me.Combo1.AddItem ("load3.html")
     Me.Combo1.ListIndex = 0
+    
+    If IsInIDE Then
+        'LoadLibrary App.Path & "\dist\ComVisibleCSharpLibrary.dll"
+        oPTouch.SetWorkDir (tbWorkDir.Text)
+    End If
     
 End Sub
 

@@ -9,9 +9,9 @@
 <description>License: 1 user license</description>
 
 <clrClass
-   name="ComVisibleCSharpLibrary.Form1"
-   clsid="{553F1C88-BC27-359D-9E18-F1A40A536122}"
-   progid="ComVisibleCSharpLibrary.Form1"
+   name="ComVisibleCSharpLibrary.MyWebView"
+   clsid="{FE69ACFA-EF8C-3D87-B7EE-B79D2E3B71B8}"
+   progid="ComVisibleCSharpLibrary.MyWebView"
    runtimeVersion="v4.0.30319"
    threadingModel="Both"/>
 <clrClass

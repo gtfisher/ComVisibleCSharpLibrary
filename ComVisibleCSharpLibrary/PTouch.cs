@@ -24,6 +24,8 @@ namespace ComVisibleCSharpLibrary
 
         int CloseForm();
 
+        void SetWorkDir(string workDIr);
+
 
     }
 
@@ -34,7 +36,7 @@ namespace ComVisibleCSharpLibrary
     [ProgId("ComVisibleCSharpLibrary.PTouch")]
     public class PTouch : AllMethods
     {
-        private Form1 _form1 = null;
+        private MyWebView _form1 = null;
         public PTouch()
         {
 
@@ -75,20 +77,27 @@ namespace ComVisibleCSharpLibrary
 
         public int ShowForm(string page)
         {
-
+            
             SimpleLog.LogText($"Info: Show Form for page:{page}");
 
-            //if (_form1 == null)
-            //{
-            var form1 = new Form1(page);
-            _form1 = form1;
-            SimpleLog.LogText($"Info: Form created");
-            //}
+            if (Application.OpenForms["MyWebView"] != null)
+            {
+                _form1.NavigateToPage(page);
+            }
+            else
+            {
+                //if (_form1 == null)
+                //{
+                var form1 = new MyWebView(page);
+                _form1 = form1;
+                SimpleLog.LogText($"Info: Form created");
+                //}
 
-            SimpleLog.LogText($"Info: Set page");
-            form1.SetPage(page);
-            SimpleLog.LogText($"Info: Show Page");
-            form1.Show();
+                SimpleLog.LogText($"Info: Set page");
+                form1.SetPage(page);
+                SimpleLog.LogText($"Info: Show Page");
+                form1.Show();
+            }
             
             return 0;
         }
@@ -124,7 +133,14 @@ namespace ComVisibleCSharpLibrary
             return 1;
         }
 
-        
+        public void SetWorkDir(string workDir)
+        {
+            SimpleLog.LogText($"Info: SetWorkDir for:{workDir}");
+            MyWebView._workPath = workDir;
+            SimpleLog.LogText($"Info: WorkDir for:{MyWebView._workPath}");
+
+        }
+
 
 
     }
