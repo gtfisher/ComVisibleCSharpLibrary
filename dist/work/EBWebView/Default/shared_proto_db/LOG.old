@@ -1,2 +1,3 @@
-2024/04/02-08:57:09.185 b878 Creating DB D:\dev\dotnet\ComVisibleCSharpLibrary\dist\work\EBWebView\Default\shared_proto_db since it was missing.
-2024/04/02-08:57:09.189 b878 Reusing MANIFEST D:\dev\dotnet\ComVisibleCSharpLibrary\dist\work\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2024/04/02-09:36:10.060 bd48 Reusing MANIFEST D:\dev\dotnet\ComVisibleCSharpLibrary\dist\work\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2024/04/02-09:36:10.060 bd48 Recovering log #3
+2024/04/02-09:36:10.060 bd48 Reusing old log D:\dev\dotnet\ComVisibleCSharpLibrary\dist\work\EBWebView\Default\shared_proto_db/000003.log 
