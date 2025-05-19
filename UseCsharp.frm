@@ -1,14 +1,54 @@
 VERSION 5.00
 Begin VB.Form UseCsharp 
    Caption         =   "Form1"
-   ClientHeight    =   3435
+   ClientHeight    =   4365
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   6120
+   ClientWidth     =   6165
    LinkTopic       =   "Form1"
-   ScaleHeight     =   3435
-   ScaleWidth      =   6120
+   ScaleHeight     =   4365
+   ScaleWidth      =   6165
    StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton btnDownload 
+      Caption         =   "download"
+      Height          =   615
+      Left            =   5160
+      TabIndex        =   24
+      Top             =   360
+      Width           =   975
+   End
+   Begin VB.CommandButton btnCommand 
+      Caption         =   "Execte COmmand"
+      Height          =   495
+      Left            =   4800
+      TabIndex        =   23
+      Top             =   3840
+      Width           =   1095
+   End
+   Begin VB.TextBox tbCommand 
+      Height          =   375
+      Left            =   1680
+      TabIndex        =   21
+      Text            =   "ShowMsg(""""Yey"")"
+      Top             =   3840
+      Width           =   2655
+   End
+   Begin VB.TextBox tbContent 
+      Height          =   285
+      Left            =   1680
+      TabIndex        =   19
+      Text            =   "D:\dev\dotnet\ComVisibleCSharpLibrary\ComVisibleCSharpLibrary\WebView2Content"
+      Top             =   3360
+      Width           =   3375
+   End
+   Begin VB.CommandButton btnHide 
+      Caption         =   "Hide Window"
+      Height          =   255
+      Left            =   4920
+      TabIndex        =   18
+      Top             =   2520
+      Width           =   1095
+   End
    Begin VB.TextBox tbWorkDir 
       Height          =   375
       Left            =   1680
@@ -17,13 +57,13 @@ Begin VB.Form UseCsharp
       Top             =   3000
       Width           =   3255
    End
-   Begin VB.CommandButton Command1 
-      Caption         =   "Command1"
+   Begin VB.CommandButton initWeb 
+      Caption         =   "Init Web"
       Height          =   375
       Left            =   5040
       TabIndex        =   15
       Top             =   1560
-      Width           =   615
+      Width           =   855
    End
    Begin VB.ComboBox Combo1 
       Height          =   315
@@ -102,6 +142,22 @@ Begin VB.Form UseCsharp
       Top             =   480
       Width           =   2535
    End
+   Begin VB.Label Command 
+      Caption         =   "Label6"
+      Height          =   375
+      Left            =   360
+      TabIndex        =   22
+      Top             =   3960
+      Width           =   975
+   End
+   Begin VB.Label Label5 
+      Caption         =   "Content Dir"
+      Height          =   255
+      Left            =   360
+      TabIndex        =   20
+      Top             =   3480
+      Width           =   975
+   End
    Begin VB.Label Work 
       Caption         =   "Work Dir"
       Height          =   255
@@ -157,11 +213,37 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private xCount As Integer
 Private oPTouch As New PTouch
+Private WithEvents m_eventSource As DemoEvents
+Attribute m_eventSource.VB_VarHelpID = -1
+
+
+Private Sub btnCommand_Click()
+    oPTouch.ExecuteScript (tbCommand.Text)
+End Sub
+
+Private Sub btnDownload_Click()
+    m_eventSource.DownloadFileAsync "https://datahub.io/core/airport-codes/r/airport-codes.json", "d:\temp\airport-codes.json"
+    
+End Sub
+
+Private Sub m_eventSource_OnDownloadCompleted()
+    MsgBox "Download Complete"
+End Sub
+
+Private Sub m_eventSource_OnDownloadFailed(ByVal message As String)
+    MsgBox "Download failed. " & message, vbCritical, "Error"
+End Sub
 
 Private Sub btnFtoC_Click()
     Dim F As Single
     F = tbF.Text
     tbC.Text = oPTouch.GetCelsious(F)
+End Sub
+
+Private Sub btnHide_Click()
+
+
+    status = oPTouch.HideForm()
 End Sub
 
 Private Sub btnIsMethodVisible_Click()
@@ -194,7 +276,10 @@ Private Function IsInIDE() As Boolean
         End If
 End Function
 
+
+
 Private Sub Form_Load()
+    'Set m_eventSource = New COMVisibleEvents.DemoEvents
     lblVersion.Caption = oPTouch.GetVersion
     
     'Combo1.Items.Insert(0,"hello.html")
@@ -202,10 +287,7 @@ Private Sub Form_Load()
     Me.Combo1.AddItem ("load3.html")
     Me.Combo1.ListIndex = 0
     
-    If IsInIDE Then
-        'LoadLibrary App.Path & "\dist\ComVisibleCSharpLibrary.dll"
-        oPTouch.SetWorkDir (tbWorkDir.Text)
-    End If
+    
     
 End Sub
 
@@ -213,8 +295,26 @@ Private Sub Form_Unload(Cancel As Integer)
     oPTouch.CloseForm
 End Sub
 
+Private Sub initWeb_Click()
+    Dim status As Integer
+    
+    
+    If IsInIDE Then
+        'LoadLibrary App.Path & "\dist\ComVisibleCSharpLibrary.dll"
+        oPTouch.SetWorkDir (tbWorkDir.Text)
+        oPTouch.SetContentDir (tbContent.Text)
+    End If
+    
+    ''oPTouch.SetContentDir (tbContent.Text)
+    
+     status = oPTouch.InitialiseWebView2()
+End Sub
+
 Private Sub tbC2F_Click()
     Dim C As String
     C = tbC.Text
     tbF.Text = oPTouch.GetFahrenheit(C)
 End Sub
+
+
+

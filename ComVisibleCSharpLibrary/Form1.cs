@@ -15,15 +15,21 @@ using System.IO;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 using System.Reflection;
+using Microsoft.Web.WebView2.Wpf;
 
 namespace ComVisibleCSharpLibrary
 {
     public partial class MyWebView : Form
     {
 
+       
+
         const bool DEBUG = true;
 
         public static string _workPath = $"./work";
+
+        public static string _content = @"./WebView2Content";
+
 
         private string _page;
         //create new instance of WebView2
@@ -38,7 +44,7 @@ namespace ComVisibleCSharpLibrary
         {
             SimpleLog.LogText($"info: Set Page:{page} ");
             _page = page;
-            //webView21.Source = new Uri($"http://localfiles/{_page}", UriKind.Absolute);
+            webView21.Source = new Uri($"http://localfiles/{_page}", UriKind.Absolute);
         }
 
         public string GetPage(string page)
@@ -48,15 +54,15 @@ namespace ComVisibleCSharpLibrary
             //webView21.Source = new Uri($"http://localfiles/{_page}", UriKind.Absolute);
         }
 
-        public MyWebView(string page)
+        public MyWebView()
         {
 
             SimpleLog.LogText("Info: Created form");
             InitializeComponent();
 
 
-            _page = page;
-            SimpleLog.LogText($"Info: Set page {_page}");
+            //_page = page;
+            //SimpleLog.LogText($"Info: Set page {_page}");
 
 
             webView21.Location = new System.Drawing.Point(10, 10);
@@ -95,6 +101,46 @@ namespace ComVisibleCSharpLibrary
 
         }
 
+        private void MyWebView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SimpleLog.LogText("FormClosing");
+
+            //Don't close, but dispose elsewhere
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+
+
+        }
+
+
+
+        public async Task ExecuteScriptAsync(String cmd)
+        {
+
+            try
+            {
+                //MessageBox.Show("calling ExecuteScriptAsync");
+                SimpleLog.LogText($"calling ExecuteScripAsync:{cmd}");
+            //string result = await webView21.ExecuteScriptAsync(cmd);
+            string jsonResult = await webView21.CoreWebView2.ExecuteScriptAsync(cmd);
+            string title = jsonResult.Trim('\"');
+            MessageBox.Show("Document Title: " + title, "Result");
+            SimpleLog.LogText("back ExecuteScriptAsync");
+            //SimpleLog.LogText($"result:{result}");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error executing script: " + ex.Message, "Error");
+            }
+
+
+
+
+        }
 
         private async Task InitializeAsync()
         {
@@ -283,11 +329,13 @@ namespace ComVisibleCSharpLibrary
             SimpleLog.LogText("Info: SetVirtualHostNameToFolderMapping");
 
             //string resourcePath = @"D:\dev\WebView2-Resource";
-            string resourcePath = @".\WebView2Content";
 
+            string resourcePath = _content;
+            SimpleLog.LogText($"Info: SetVirtualHostNameToFolderMapping content is: {_content}");
             string webViewContentEnv = Environment.GetEnvironmentVariable("WebView2Content");
             if (webViewContentEnv != null)
             {
+                SimpleLog.LogText($"webViewContentEnv is:{webViewContentEnv}");
                 resourcePath = webViewContentEnv;
             }
 

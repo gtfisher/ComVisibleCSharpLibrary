@@ -10,4 +10,18 @@ setTimeout(function() {
   //your code to be executed after 1 second
 }, delayInMilliseconds);
 
+function show(msg) {
+    console.log("show called")
+    var div = document.getElementById('h2');
+    div.innerHTML = msg;
+    return "done"
+}
 
+
+document.showMsg = function (msg) {
+    console.info("showMsg");
+    var div = document.getElementById('h2');
+    div.innerHTML += "message"; // msg;
+  //your code to be executed after 1 second
+}
+   
